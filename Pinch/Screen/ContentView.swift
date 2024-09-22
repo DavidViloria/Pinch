@@ -59,6 +59,8 @@ struct ContentView: View {
                     )
                 
             }//:ZSTACK
+            
+            //: MARK: - INFO PANEL
             .onAppear(perform: {
                 withAnimation(.linear(duration: 1)) {
                     isAnimating = true
@@ -71,6 +73,60 @@ struct ContentView: View {
                     .padding(.horizontal)
                     .padding(.top, 20)
             }
+            //: MARK: - CONTROLS
+            .overlay (
+                Group{
+                    HStack{
+                        //Scale Down
+                        Button {
+                            withAnimation(Animation.spring) {
+                                if imageScale > 1 {
+                                    imageScale -= 1
+                                    
+                                    if imageScale <= 1 {
+                                        resetImageState()
+                                    }
+                                }
+                            }
+                        } label: {
+                            ControlImageView(icon: "minus.magnifyingglass")
+
+                        }
+                        
+                        // Reset
+                        Button {
+                            resetImageState()
+                        } label: {
+                            ControlImageView(icon: "arrow.up.left.and.down.right.magnifyingglass")
+
+                        }
+                        
+                        //Scale Up
+                        Button {
+                            withAnimation(.spring) {
+                                if imageScale < 5{
+                                    imageScale += 1
+                                    
+                                    if imageScale > 5 {
+                                        imageScale = 5
+                                    }
+                                }
+                            }
+                        } label: {
+                            ControlImageView(icon: "plus.magnifyingglass")
+                            
+                        }
+                    }
+                    .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+                    .background(.ultraThinMaterial)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: 12)
+                    )
+                    .opacity(isAnimating ? 1 : 0)
+                    
+                }.padding(.top)
+                , alignment: .bottom
+            )
         }//: NAVIGATION
         .navigationBarTitleDisplayMode(.inline)
     }
