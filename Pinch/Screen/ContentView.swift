@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var imageScale: CGFloat = 1
     @State private var imageOffset: CGSize = .zero
     
-    
     var body: some View {
         NavigationView {
             ZStack{
@@ -36,9 +35,7 @@ struct ContentView: View {
                                 imageScale = 5
                             }
                         } else {
-                            withAnimation(.spring()) {
-                                imageScale = 1
-                            }
+                            resetImageState()
                         }
                     }
                 
@@ -53,9 +50,10 @@ struct ContentView: View {
                             })
                         
                             .onEnded({ _ in
-                                withAnimation(.snappy) {
-                                    imageOffset = .zero
+                                if imageScale <= 1 {
+                                    resetImageState()
                                 }
+                                
                             })
                     )
                 
@@ -69,6 +67,14 @@ struct ContentView: View {
             .navigationViewStyle(.stack)
         }//: NAVIGATION
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    // MARK - Functions
+    func resetImageState() {
+        return withAnimation(.spring()){
+            imageScale = 1
+            imageOffset = .zero
+        }
     }
 }
 
