@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "_middle_east_abbasid__harun_al_rashid__2_by_storiagold_dhyxn8r.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
